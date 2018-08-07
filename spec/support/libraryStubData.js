@@ -143,7 +143,7 @@ var libraryStubData = {
             return;
         },
     },
-    'test-partner-htb-validator.js': function () {
+    'consumable-htb-validator.js': function () {
         return null;
     }
 };

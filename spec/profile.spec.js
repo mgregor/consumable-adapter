@@ -29,7 +29,7 @@ describe('Partner Profile', function () {
     var inspector = require('schema-inspector');
     var proxyquire = require('proxyquire').noCallThru();
     var libraryStubData = require('./support/libraryStubData.js');
-    var partnerModule = proxyquire('../test-partner-htb.js', libraryStubData);
+    var partnerModule = proxyquire('../consumable-htb.js', libraryStubData);
     var partnerConfig = require('./support/mockPartnerConfig.json');
     var expect = require('chai').expect;
     /* -------------------------------------------------------------------- */

@@ -1,14 +1,14 @@
 {
-  "name": "test-partner-module",
+  "name": "consumable-module",
   "version": "2.1.0",
   "description": "a complete self-serve partner development package for the header tag wrapper",
-  "main": "test-partner-htb.js",
+  "main": "consumable-htb.js",
   "scripts": {
     "test": "jasmine"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:indexexchange/test-partner-adapter.git"
+    "url": "git@github.com:indexexchange/consumable-adapter.git"
   },
   "author": "Index Exchange",
   "license": "UNLICENSED",
