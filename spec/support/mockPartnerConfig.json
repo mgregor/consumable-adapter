@@ -2,22 +2,19 @@
     "timeout": 1000,
     "xSlots": {
         "1": {
-            "placementId": "54321",
-            "sizes": [
-                [300, 250]
-            ]
+            "unitId": "1",
+            "unitName": "gazelle",
+            "zoneId": "1000"
         },
         "2": {
-            "placementId": "12345",
-            "sizes": [
-                [300, 600]
-            ]
+            "unitId": "2",
+            "unitName": "hyena",
+            "zoneId": "1001"
         },
         "3": {
-            "placementId": "654321",
-            "sizes": [
-                [728, 90]
-            ]
+            "unitId": "3",
+            "unitName": "giraffe",
+            "zoneId": "1002"
         }
     },
     "mapping": {
