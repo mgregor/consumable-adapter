@@ -43,9 +43,14 @@ var partnerValidator = function (configs) {
                     '*': {
                         type: 'object',
                         properties: {
-                            placementId: {
-                                type: 'string',
-                                minLength: 1
+                            unitId: {
+                                type: 'string'
+                            },
+                            unitName: {
+                                type: 'string'
+                            },
+                            zoneId: {
+                                type: 'string'
                             }
                         }
                     }
