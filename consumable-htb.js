@@ -447,9 +447,9 @@ function ConsumableHtb(configs) {
             },
             bidUnitInCents: 1, // The bid price unit (in cents) the endpoint returns, please refer to the readme for details
             lineItemType: Constants.LineItemTypes.ID_AND_SIZE,
-            callbackType: Partner.CallbackTypes.ID, // Callback type, please refer to the readme for details
+            callbackType: Partner.CallbackTypes.NONE, // Callback type, please refer to the readme for details
             architecture: Partner.Architectures.MRA, // Request architecture, please refer to the readme for details
-            requestType: Partner.RequestTypes.ANY // Request type, jsonp, ajax, or any.
+            requestType: Partner.RequestTypes.AJAX // Request type, jsonp, ajax, or any.
         };
         /* ---------------------------------------------------------------------------------------*/
 
