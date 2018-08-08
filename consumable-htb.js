@@ -429,10 +429,10 @@ function ConsumableHtb(configs) {
                 }
             },
             targetingKeys: { // Targeting keys for demand, should follow format ix_{statsId}_id
-                id: 'ix_%%partnerid%%_id',
-                om: 'ix_%%partnerid%%_cpm',
-                pm: 'ix_%%partnerid%%_cpm',
-                pmid: 'ix_%%partnerid%%_dealid'
+                id: 'ix_consumable_id',
+                om: 'ix_consumable_cpm',
+                pm: 'ix_consumable_cpm',
+                pmid: 'ix_consumable_dealid'
             },
             bidUnitInCents: 1, // The bid price unit (in cents) the endpoint returns, please refer to the readme for details
             lineItemType: Constants.LineItemTypes.ID_AND_SIZE,

@@ -374,8 +374,8 @@ After filling out these objects, the resulting returnParcel objects should look 
     // notice these new fields with demand
     "targetingType": "slot"
     "targeting" : {
-        "ix_%%partnerid%%_id": ["_230l09jd2"],
-        "ix_%%partnerid%%_cpm": ["300x250_2.50"]
+        "ix_consumable_id": ["_230l09jd2"],
+        "ix_consumable_cpm": ["300x250_2.50"]
     },
     "price": 2.50,
     "size": [300,250],
