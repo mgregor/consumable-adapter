@@ -177,7 +177,7 @@ function ConsumableHtb(configs) {
         var joinedAdtechParameters = '';
 
         for (var key in adTechParameters) {
-            if (Object.hasOwnProperty(key)) {
+            if (Object.hasOwnProperty.call(adTechParameters, key)) {
                 joinedAdtechParameters += ';' + key + '=' + adTechParameters[key];
             }
         }
