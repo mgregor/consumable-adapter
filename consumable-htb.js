@@ -141,12 +141,9 @@ function ConsumableHtb(configs) {
          * }
          */
 
-        /* ---------------------- PUT CODE HERE ------------------------------------ */
-        var queryObj = {};
         var callbackId = System.generateUniqueId();
 
-        /* Change this to your bidder endpoint.*/
-        var baseUrl = Browser.getProtocol() + '//someAdapterEndpoint.com/bid';
+        var baseUrl = Browser.getProtocol() + "//adserver-us.adtech.advertising.com/pubapi/3.0/";
 
         /* ------------------------ Get consent information -------------------------
          * If you want to implement GDPR consent in your adapter, use the function
@@ -164,17 +161,31 @@ function ConsumableHtb(configs) {
          *      consentString: "BOQ7WlgOQ7WlgABABwAAABJOACgACAAQABA"
          * }
          */
-        var gdprStatus = ComplianceService.gdpr.getConsent();
+        //var gdprStatus = ComplianceService.gdpr.getConsent();
 
-        /* ---------------- Craft bid request using the above returnParcels --------- */
+        var parcel = returnParcels[0];
+        var network = parcel.network || "10947.1";
+        var placementId = parcel.placementId;
 
-        /* ------- Put GDPR consent code here if you are implementing GDPR ---------- */
+        var adTechParameters = {
+            v: '2',
+            cmd: 'bid',
+            cors: 'yes',
+            misc: System.now()
+        };
 
-        /* -------------------------------------------------------------------------- */
+        var joinedAdtechParameters = '';
+
+        for (var key in adTechParameters) {
+            if (Object.hasOwnProperty(key)) {
+                joinedAdtechParameters += ';' + key + '=' + adTechParameters[key];
+            }
+        }
+
+        var url = Network.buildUrl(baseUrl, [network, placementId, '0', '0', 'ADTECH' + joinedAdtechParameters]);
 
         return {
             url: baseUrl,
-            data: queryObj,
             callbackId: callbackId
         };
     }
