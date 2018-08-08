@@ -2,20 +2,20 @@
     "timeout": 1000,
     "xSlots": {
         "1": {
-            "network": "9599.1",
-            "placement": 1,
+            "networkId": "9599.1",
+            "placementId": "1",
             "unitId": "1",
             "unitName": "gazelle",
             "zoneId": "1000"
         },
         "2": {
-            "placement": 2,
+            "placementId": "2",
             "unitId": "2",
             "unitName": "hyena",
             "zoneId": "1001"
         },
         "3": {
-            "placement": 3,
+            "placementId": "3",
             "unitId": "3",
             "unitName": "giraffe",
             "zoneId": "1002"

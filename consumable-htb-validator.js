@@ -43,12 +43,13 @@ var partnerValidator = function (configs) {
                     '*': {
                         type: 'object',
                         properties: {
-                            network: {
+                            networkId: {
                                 type: 'string',
                                 optional: true
                             },
-                            placement: {
-                                type: 'number'
+                            placementId: {
+                                type: 'string',
+                                minLength: 1
                             },
                             unitId: {
                                 type: 'string'
