@@ -44,7 +44,8 @@ var partnerValidator = function (configs) {
                         type: 'object',
                         properties: {
                             network: {
-                                type: 'string'
+                                type: 'string',
+                                optional: true
                             },
                             placement: {
                                 type: 'number'
