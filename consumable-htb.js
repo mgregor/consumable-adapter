@@ -45,7 +45,7 @@ var Whoopsie = require('whoopsie.js');
  *
  * @class
  */
-function TestPartnerHtb(configs) {
+function ConsumableHtb(configs) {
     /* =====================================
      * Data
      * ---------------------------------- */
@@ -410,8 +410,8 @@ function TestPartnerHtb(configs) {
 
         /* ---------- Please fill out this partner profile according to your module ------------*/
         __profile = {
-            partnerId: 'TestPartnerHtb', // PartnerName
-            namespace: 'TestPartnerHtb', // Should be same as partnerName
+            partnerId: 'ConsumableHtb', // PartnerName
+            namespace: 'ConsumableHtb', // Should be same as partnerName
             statsId: '%%PARTNERID%%', // Unique partner identifier
             version: '2.1.1',
             targetingType: 'slot',
@@ -466,7 +466,7 @@ function TestPartnerHtb(configs) {
          * ---------------------------------- */
 
         //? if (DEBUG) {
-        __type__: 'TestPartnerHtb',
+        __type__: 'ConsumableHtb',
         //? }
 
         //? if (TEST) {
@@ -497,4 +497,4 @@ function TestPartnerHtb(configs) {
 // Exports /////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-module.exports = TestPartnerHtb;
+module.exports = ConsumableHtb;

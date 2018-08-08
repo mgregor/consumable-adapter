@@ -39,7 +39,7 @@ Below you will find everything you need to complete the certification process an
     * This file is where your partner-specific configurations will need to be validated.
     * Things like type and null checks will be done here.
 3. <b>Complete the consumable-htb-exports.js file</b>
-    * This file will contain any functions that need to be exported or exposed to the outside world. Things like render functions, custom callbacks, etc. Any legacy render functions will also need to be exposed here. Anything added to the `shellInterface.TestPartnerHtb` will be accessible through `window.headertag.TestPartnerHtb`
+    * This file will contain any functions that need to be exported or exposed to the outside world. Things like render functions, custom callbacks, etc. Any legacy render functions will also need to be exposed here. Anything added to the `shellInterface.ConsumableHtb` will be accessible through `window.headertag.ConsumableHtb`
 4. <b> Run & Create Unit tests for your module</b>
     * Inside the spec folder you will find a set of basic unit tests for your module.
     * You must pass these basic unit tests before submitting your module.
@@ -57,7 +57,7 @@ for (var i = 0; i < 10; i++) {
     w = w.parent;
     if (w.headertag) {
         try {
-            w.headertag.TestPartnerHtb.render(document, %%PATTERN:TARGETINGMAP%%, '%%WIDTH%%', '%%HEIGHT%%');
+            w.headertag.ConsumableHtb.render(document, %%PATTERN:TARGETINGMAP%%, '%%WIDTH%%', '%%HEIGHT%%');
             break;
         } catch (e) {
             continue;
@@ -133,7 +133,7 @@ Example Partner Configuration Mapping
 ```javascript
 {
     "partners": {
-        "TestPartnerHtb": {
+        "ConsumableHtb": {
             "enabled": true,
             "configs": {
                 "xSlots": {
@@ -391,8 +391,8 @@ It will be called with the paramter `pixelUrl` that needs to be filled out in `_
 In this step, you will be required to fill out the exports file for your module. This file will contain all of the functions that will need to be exposed to outside page if they need to be accessed outside of the wrapper. In the usual case, all you will need to change in this file is your partner module's name in the included snippet:
 
 ```javascript
-shellInterface.TestPartnerHtb = { //shell interface is the window variable that is accessable through the window object, currently this will always be window.headertag
-    render: SpaceCamp.services.RenderService.renderDfpAd.bind(null, 'TestPartnerHtb')
+shellInterface.ConsumableHtb = { //shell interface is the window variable that is accessable through the window object, currently this will always be window.headertag
+    render: SpaceCamp.services.RenderService.renderDfpAd.bind(null, 'ConsumableHtb')
 };
 ```
 
@@ -401,18 +401,18 @@ This snippet, exposes your module's render function to the outside world via the
 If your module requires using a custom adResponse callback via Partner.CallbackTypes.ID callback type, that callback will need to be exposed here. Which would look something like this:
 
 ```javascript
-if (__directInterface.Layers.PartnersLayer.Partners.TestPartnerHtb) {
-    shellInterface.TestPartnerHtb = shellInterface.TestPartnerHtb || {};
-    shellInterface.TestPartnerHtb.adResponseCallback = __directInterface.Layers.PartnersLayer.Partners.TestPartnerHtb.adResponseCallback;
+if (__directInterface.Layers.PartnersLayer.Partners.ConsumableHtb) {
+    shellInterface.ConsumableHtb = shellInterface.ConsumableHtb || {};
+    shellInterface.ConsumableHtb.adResponseCallback = __directInterface.Layers.PartnersLayer.Partners.ConsumableHtb.adResponseCallback;
 }
 ```
 
 If your module requires using a custom adResponse callback via Partner.CallbackTypes.NAME callback type, that callback swill need to be exposed here. Which would look something like this:
 
 ```javascript
-if (__directInterface.Layers.PartnersLayer.Partners.TestPartnerHtb) {
-    shellInterface.TestPartnerHtb = shellInterface.TestPartnerHtb || {};
-    shellInterface.TestPartnerHtb.adResponseCallbacks = __directInterface.Layers.PartnersLayer.Partners.TestPartnerHtb.adResponseCallbacks;
+if (__directInterface.Layers.PartnersLayer.Partners.ConsumableHtb) {
+    shellInterface.ConsumableHtb = shellInterface.ConsumableHtb || {};
+    shellInterface.ConsumableHtb.adResponseCallbacks = __directInterface.Layers.PartnersLayer.Partners.ConsumableHtb.adResponseCallbacks;
 }
 ```
 
@@ -522,7 +522,7 @@ For example, `mockPartnerConfig.json` contains a sample partner config. Here are
 
 ```javascript
 var returnParcels = [{
-    partnerId: 'TestPartnerHtb',
+    partnerId: 'ConsumableHtb',
     htSlot: { getId: function () {
         return "htSlot1"
     } },
@@ -530,7 +530,7 @@ var returnParcels = [{
     xSlotRef: { placementId: '54321', sizes: [ [300,250] ] },
     requestId: '_1496788873668',
   },{
-    partnerId: 'TestPartnerHtb',
+    partnerId: 'ConsumableHtb',
     htSlot: { getId: function () {
         return "htSlot1"
     } },
@@ -538,7 +538,7 @@ var returnParcels = [{
     xSlotRef: { placementId: '12345', sizes: [ [300,600] ] },
     requestId: '_1496788873668',
   },{
-    partnerId: 'TestPartnerHtb',
+    partnerId: 'ConsumableHtb',
     htSlot: { getId: function () {
         return "htSlot2"
     } },

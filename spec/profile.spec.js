@@ -49,7 +49,7 @@ describe('Partner Profile', function () {
             properties: {
                 partnerId: {
                     type: 'string',
-                    eq: 'TestPartnerHtb'
+                    eq: 'ConsumableHtb'
                 },
                 namespace: {
                     type: 'string',
