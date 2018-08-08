@@ -57,7 +57,7 @@ describe('Partner Profile', function () {
                 },
                 statsId: {
                     type: 'string',
-                    eq: '%%PARTNERID%%'
+                    eq: 'CONSUMABLE'
                 },
                 version: {
                     type: 'string'
@@ -102,7 +102,7 @@ describe('Partner Profile', function () {
                                 if (targetingSplit[0] !== 'ix' ||
                                     targetingSplit[1] !== profile.statsId.toLowerCase() ||
                                     targetingSplit[2] !== 'id') {
-                                    this.report('id tageting key should be of the format ix_{%%PARTNERID%%}_id')
+                                    this.report('id tageting key should be of the format ix_{CONSUMABLE}_id')
                                 }
                             }
                         },
@@ -114,7 +114,7 @@ describe('Partner Profile', function () {
                                 if (targetingSplit[0] !== 'ix' ||
                                     targetingSplit[1] !== profile.statsId.toLowerCase() ||
                                     targetingSplit[2] !== 'cpm') {
-                                    this.report('om tageting key should be of the format ix_%%PARTNERID%%_cpm')
+                                    this.report('om tageting key should be of the format ix_CONSUMABLE_cpm')
                                 }
                             }
                         },
@@ -126,7 +126,7 @@ describe('Partner Profile', function () {
                                 if (targetingSplit[0] !== 'ix' ||
                                     targetingSplit[1] !== profile.statsId.toLowerCase() ||
                                     targetingSplit[2] !== 'cpm') {
-                                    this.report('pm tageting key should be of the format ix_%%PARTNERID%%_cpm')
+                                    this.report('pm tageting key should be of the format ix_CONSUMABLE_cpm')
                                 }
                             }
                         },
@@ -138,7 +138,7 @@ describe('Partner Profile', function () {
                                 if (targetingSplit[0] !== 'ix' ||
                                     targetingSplit[1] !== profile.statsId.toLowerCase() ||
                                     targetingSplit[2] !== 'dealid') {
-                                    this.report('pmid tageting key should be of the format ix_%%PARTNERID%%_dealid')
+                                    this.report('pmid tageting key should be of the format ix_CONSUMABLE_dealid')
                                 }
                             }
                         }

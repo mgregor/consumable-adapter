@@ -412,7 +412,7 @@ function ConsumableHtb(configs) {
         __profile = {
             partnerId: 'ConsumableHtb', // PartnerName
             namespace: 'ConsumableHtb', // Should be same as partnerName
-            statsId: '%%PARTNERID%%', // Unique partner identifier
+            statsId: 'CONSUMABLE', // Unique partner identifier
             version: '2.1.1',
             targetingType: 'slot',
             enabledAnalytics: {

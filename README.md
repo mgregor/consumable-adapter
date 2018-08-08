@@ -162,7 +162,7 @@ Each parcel is an object in the following form:
 
 ```javascript
 {
-    "partnerId": "%%PARTNERID%%",
+    "partnerId": "CONSUMABLE",
     "htSlot": {
       "__type__": "HeaderTagSlot"
     },
@@ -359,7 +359,7 @@ After filling out these objects, the resulting returnParcel objects should look 
 
 ```javascript
 {
-    "partnerId": "%%PARTNERID%%",
+    "partnerId": "CONSUMABLE",
     "htSlot": {
       "__type__": "HeaderTagSlot"
     },
