@@ -43,6 +43,12 @@ var partnerValidator = function (configs) {
                     '*': {
                         type: 'object',
                         properties: {
+                            network: {
+                                type: 'string'
+                            },
+                            placement: {
+                                type: 'number'
+                            },
                             unitId: {
                                 type: 'string'
                             },
