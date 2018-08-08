@@ -25,6 +25,7 @@ var SpaceCamp = require('space-camp.js');
 var System = require('system.js');
 var Network = require('network.js');
 var Utilities = require('utilities.js');
+var OpenRtb = require('openrtb.js');
 var ComplianceService;
 var EventsService;
 var RenderService;
@@ -247,142 +248,115 @@ function ConsumableHtb(configs) {
          *
          */
 
-        /* ---------- Process adResponse and extract the bids into the bids array ------------*/
+        var ortbResponse = OpenRtb.BidResponse(adResponse);
 
-        var bids = adResponse;
+        var curBid = ortbResponse.getBids()[0];
+        var curReturnParcel = returnParcels[0];
 
-        /* --------------------------------------------------------------------------------- */
-
-        for (var j = 0; j < returnParcels.length; j++) {
-
-            var curReturnParcel = returnParcels[j];
-
-            var headerStatsInfo = {};
-            var htSlotId = curReturnParcel.htSlot.getId();
-            headerStatsInfo[htSlotId] = {};
-            headerStatsInfo[htSlotId][curReturnParcel.requestId] = [curReturnParcel.xSlotName];
-
-            var curBid;
-
-            for (var i = 0; i < bids.length; i++) {
-
-                /**
-                 * This section maps internal returnParcels and demand returned from the bid request.
-                 * In order to match them correctly, they must be matched via some criteria. This
-                 * is usually some sort of placements or inventory codes. Please replace the someCriteria
-                 * key to a key that represents the placement in the configuration and in the bid responses.
-                 */
-
-                /* ----------- Fill this out to find a matching bid for the current parcel ------------- */
-                if (curReturnParcel.xSlotRef.someCriteria === bids[i].someCriteria) {
-                    curBid = bids[i];
-                    bids.splice(i, 1);
-                    break;
-                }
-            }
-
-            /* No matching bid found so its a pass */
-            if (!curBid) {
-                if (__profile.enabledAnalytics.requestTime) {
-                    __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
-                }
-                curReturnParcel.pass = true;
-                continue;
-            }
-
-            /* ---------- Fill the bid variables with data from the bid response here. ------------*/
-
-            /* Using the above variable, curBid, extract various information about the bid and assign it to
-             * these local variables */
-
-            /* the bid price for the given slot */
-            var bidPrice = curBid.price;
-
-            /* the size of the given slot */
-            var bidSize = [Number(curBid.width), Number(curBid.height)];
-
-            /* the creative/adm for the given slot that will be rendered if is the winner.
-             * Please make sure the URL is decoded and ready to be document.written.
-             */
-            var bidCreative = curBid.adm;
-
-            /* the dealId if applicable for this slot. */
-            var bidDealId = curBid.dealid;
-
-            /* explicitly pass */
-            var bidIsPass = bidPrice <= 0 ? true : false;
-
-            /* OPTIONAL: tracking pixel url to be fired AFTER rendering a winning creative.
-            * If firing a tracking pixel is not required or the pixel url is part of the adm,
-            * leave empty;
-            */
-            var pixelUrl = '';
-
-            /* ---------------------------------------------------------------------------------------*/
-
-            curBid = null;
-            if (bidIsPass) {
-                //? if (DEBUG) {
-                Scribe.info(__profile.partnerId + ' returned pass for { id: ' + adResponse.id + ' }.');
-                //? }
-                if (__profile.enabledAnalytics.requestTime) {
-                    __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
-                }
-                curReturnParcel.pass = true;
-                continue;
-            }
+        if (!curBid || !Object.hasOwnProperty.call(curBid, 'nbr')) {
+            //? if (DEBUG) {
+            Scribe.info(__profile.partnerId + ' no bid response for { id: ' + curReturnParcel.xSlotRef.placementId + ' }.');
+            //? }
 
             if (__profile.enabledAnalytics.requestTime) {
-                __baseClass._emitStatsEvent(sessionId, 'hs_slot_bid', headerStatsInfo);
+                __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
             }
 
-            curReturnParcel.size = bidSize;
-            curReturnParcel.targetingType = 'slot';
-            curReturnParcel.targeting = {};
-
-            var targetingCpm = '';
-
-            //? if (FEATURES.GPT_LINE_ITEMS) {
-            targetingCpm = __baseClass._bidTransformers.targeting.apply(bidPrice);
-            var sizeKey = Size.arrayToString(curReturnParcel.size);
-
-            if (bidDealId) {
-                curReturnParcel.targeting[__baseClass._configs.targetingKeys.pmid] = [sizeKey + '_' + bidDealId];
-                curReturnParcel.targeting[__baseClass._configs.targetingKeys.pm] = [sizeKey + '_' + targetingCpm];
-            } else {
-                curReturnParcel.targeting[__baseClass._configs.targetingKeys.om] = [sizeKey + '_' + targetingCpm];
-            }
-            curReturnParcel.targeting[__baseClass._configs.targetingKeys.id] = [curReturnParcel.requestId];
-            //? }
-
-            //? if (FEATURES.RETURN_CREATIVE) {
-            curReturnParcel.adm = bidCreative;
-            if (pixelUrl) {
-                curReturnParcel.winNotice = __renderPixel.bind(null, pixelUrl);
-            }
-            //? }
-
-            //? if (FEATURES.RETURN_PRICE) {
-            curReturnParcel.price = Number(__baseClass._bidTransformers.price.apply(bidPrice));
-            //? }
-
-            var pubKitAdId = RenderService.registerAd({
-                sessionId: sessionId,
-                partnerId: __profile.partnerId,
-                adm: bidCreative,
-                requestId: curReturnParcel.requestId,
-                size: curReturnParcel.size,
-                price: targetingCpm,
-                dealId: bidDealId || undefined,
-                timeOfExpiry: __profile.features.demandExpiry.enabled ? (__profile.features.demandExpiry.value + System.now()) : 0,
-                auxFn: __renderPixel,
-                auxArgs: [pixelUrl]
-            });
-
-            //? if (FEATURES.INTERNAL_RENDER) {
-            curReturnParcel.targeting.pubKitAdId = pubKitAdId;
-            //? }
+            curReturnParcel.pass = true;
         }
+
+        /* ---------- Fill the bid variables with data from the bid response here. ------------*/
+
+        /* Using the above variable, curBid, extract various information about the bid and assign it to
+         * these local variables */
+
+        /* the bid price for the given slot */
+        var bidPrice = Number(curBid.price);
+
+        /* the size of the given slot */
+        var bidSize = [Number(curBid.w), Number(curBid.h)];
+
+        /* the creative/adm for the given slot that will be rendered if is the winner.
+         * Please make sure the URL is decoded and ready to be document.written.
+         */
+        var bidCreative = curBid.adm;
+
+        /* the dealId if applicable for this slot. */
+        var bidDealId = '';
+
+        /* explicitly pass */
+        var bidIsPass = bidPrice <= 0;
+
+        /* OPTIONAL: tracking pixel url to be fired AFTER rendering a winning creative.
+        * If firing a tracking pixel is not required or the pixel url is part of the adm,
+        * leave empty;
+        */
+        var pixelUrl = '';
+
+        /* ---------------------------------------------------------------------------------------*/
+
+        curBid = null;
+        if (bidIsPass) {
+            //? if (DEBUG) {
+            Scribe.info(__profile.partnerId + ' returned pass for { id: ' + adResponse.id + ' }.');
+            //? }
+            if (__profile.enabledAnalytics.requestTime) {
+                __baseClass._emitStatsEvent(sessionId, 'hs_slot_pass', headerStatsInfo);
+            }
+            curReturnParcel.pass = true;
+            return;
+        }
+
+        if (__profile.enabledAnalytics.requestTime) {
+            __baseClass._emitStatsEvent(sessionId, 'hs_slot_bid', headerStatsInfo);
+        }
+
+        curReturnParcel.size = bidSize;
+        curReturnParcel.targetingType = 'slot';
+        curReturnParcel.targeting = {};
+
+        var targetingCpm = '';
+
+        //? if (FEATURES.GPT_LINE_ITEMS) {
+        targetingCpm = __baseClass._bidTransformers.targeting.apply(bidPrice);
+        var sizeKey = Size.arrayToString(curReturnParcel.size);
+
+        if (bidDealId) {
+            curReturnParcel.targeting[__baseClass._configs.targetingKeys.pmid] = [sizeKey + '_' + bidDealId];
+            curReturnParcel.targeting[__baseClass._configs.targetingKeys.pm] = [sizeKey + '_' + targetingCpm];
+        } else {
+            curReturnParcel.targeting[__baseClass._configs.targetingKeys.om] = [sizeKey + '_' + targetingCpm];
+        }
+        curReturnParcel.targeting[__baseClass._configs.targetingKeys.id] = [curReturnParcel.requestId];
+        //? }
+
+        //? if (FEATURES.RETURN_CREATIVE) {
+        curReturnParcel.adm = bidCreative;
+        if (pixelUrl) {
+            curReturnParcel.winNotice = __renderPixel.bind(null, pixelUrl);
+        }
+        //? }
+
+        //? if (FEATURES.RETURN_PRICE) {
+        curReturnParcel.price = Number(__baseClass._bidTransformers.price.apply(bidPrice));
+        //? }
+
+        var pubKitAdId = RenderService.registerAd({
+            sessionId: sessionId,
+            partnerId: __profile.partnerId,
+            adm: bidCreative,
+            requestId: curReturnParcel.requestId,
+            size: curReturnParcel.size,
+            price: targetingCpm,
+            dealId: bidDealId || undefined,
+            timeOfExpiry: __profile.features.demandExpiry.enabled ? (__profile.features.demandExpiry.value + System.now()) : 0,
+            auxFn: __renderPixel,
+            auxArgs: [pixelUrl]
+        });
+
+        //? if (FEATURES.INTERNAL_RENDER) {
+        curReturnParcel.targeting.pubKitAdId = pubKitAdId;
+        //? }
     }
 
     /* =====================================
