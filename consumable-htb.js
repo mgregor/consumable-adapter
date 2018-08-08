@@ -185,7 +185,7 @@ function ConsumableHtb(configs) {
         var url = Network.buildUrl(baseUrl, [network, placementId, '0', '0', 'ADTECH' + joinedAdtechParameters]);
 
         return {
-            url: baseUrl,
+            url: url,
             callbackId: callbackId
         };
     }
