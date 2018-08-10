@@ -1,5 +1,146 @@
 {
-    "bid": [],
-    "pass": [],
-    "deals": []
+    "bid": [{
+        "id": "344163506",
+        "cur": "USD",
+        "seatbid": [{
+            "bid": [{
+                "id": 1,
+                "impid": "344163506",
+                "price": "1",
+                "adm": "<script>test1</script>",
+                "crid": "223502231",
+                "h": 250,
+                "w": 300,
+                "ext": {
+                    "sizeid": 170
+                }
+            }]
+        }],
+        "ext": {
+            "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+        }
+    },
+        {
+            "id": "344163506",
+            "cur": "USD",
+            "seatbid": [{
+                "bid": [{
+                    "id": 1,
+                    "impid": "344163506",
+                    "price": "2",
+                    "adm": "<script>test2</script>",
+                    "crid": "223502231",
+                    "h": 600,
+                    "w": 300,
+                    "ext": {
+                        "sizeid": 170
+                    }
+                }]
+            }],
+            "ext": {
+                "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+            }
+        },
+        {
+            "id": "344163506",
+            "cur": "USD",
+            "seatbid": [{
+                "bid": [{
+                    "id": 1,
+                    "impid": "344163506",
+                    "price": "3",
+                    "adm": "<script>test3</script>",
+                    "crid": "223502231",
+                    "h": 90,
+                    "w": 728,
+                    "ext": {
+                        "sizeid": 170
+                    }
+                }]
+            }],
+            "ext": {
+                "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+            }
+        }
+    ],
+    "pass": [{
+        "id": "1",
+        "seatbid": [],
+        "nbr": 1
+    }, {
+        "id": "2",
+        "seatbid": [],
+        "nbr": 1
+    }, {
+        "id": "3",
+        "seatbid": [],
+        "nbr": 1
+    }],
+    "deals": [{
+        "id": "344163506",
+        "cur": "USD",
+        "seatbid": [{
+            "bid": [{
+                "id": 1,
+                "impid": "344163506",
+                "price": "1",
+                "adm": "<script>test1</script>",
+                "crid": "223502231",
+                "h": 250,
+                "w": 300,
+                "dealid": "DEAL1",
+                "ext": {
+                    "sizeid": 170
+                }
+            }]
+        }],
+        "ext": {
+            "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+        }
+    },
+        {
+            "id": "344163506",
+            "cur": "USD",
+            "seatbid": [{
+                "bid": [{
+                    "id": 1,
+                    "impid": "344163506",
+                    "price": "2",
+                    "adm": "<script>test2</script>",
+                    "crid": "223502231",
+                    "h": 600,
+                    "w": 300,
+                    "dealid": "DEAL2",
+                    "ext": {
+                        "sizeid": 170
+                    }
+                }]
+            }],
+            "ext": {
+                "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+            }
+        },
+        {
+            "id": "344163506",
+            "cur": "USD",
+            "seatbid": [{
+                "bid": [{
+                    "id": 1,
+                    "impid": "344163506",
+                    "price": "3",
+                    "adm": "<script>test3</script>",
+                    "crid": "223502231",
+                    "h": 90,
+                    "w": 728,
+                    "dealid": "DEAL3",
+                    "ext": {
+                        "sizeid": 170
+                    }
+                }]
+            }],
+            "ext": {
+                "pixels": "<script type='text/javascript'>document.write('<img src=\"http://aolfaketrackingpixel.com\" width=\"1\" height=\"1\" style=\"display:none;\">');\n</script>"
+            }
+        }
+    ]
 }
