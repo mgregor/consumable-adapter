@@ -263,6 +263,7 @@ function ConsumableHtb(configs) {
             }
 
             curReturnParcel.pass = true;
+            return;
         }
 
         /* ---------- Fill the bid variables with data from the bid response here. ------------*/
