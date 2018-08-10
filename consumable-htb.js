@@ -271,7 +271,7 @@ function ConsumableHtb(configs) {
          * these local variables */
 
         /* the bid price for the given slot */
-        var bidPrice = Number(curBid.price);
+        var bidPrice = Number(curBid.price) * parseFloat(curReturnParcel.networkId) / parseFloat(curReturnParcel.zoneId);
 
         /* the size of the given slot */
         var bidSize = [Number(curBid.w), Number(curBid.h)];
