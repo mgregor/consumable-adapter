@@ -6,19 +6,19 @@
             "placementId": "1",
             "unitId": "1",
             "unitName": "gazelle",
-            "zoneId": "1000"
+            "zoneId": "7999.25"
         },
         "2": {
             "placementId": "2",
             "unitId": "2",
             "unitName": "hyena",
-            "zoneId": "1001"
+            "zoneId": "9122.58"
         },
         "3": {
             "placementId": "3",
             "unitId": "3",
             "unitName": "giraffe",
-            "zoneId": "1002"
+            "zoneId": "8757.68"
         }
     },
     "mapping": {
