@@ -165,7 +165,7 @@ function ConsumableHtb(configs) {
         //var gdprStatus = ComplianceService.gdpr.getConsent();
 
         var parcel = returnParcels[0];
-        var network = parcel.network || "10947.1";
+        var networkId = parcel.networkId || "10947.1";
         var placementId = parcel.placementId;
 
         var adTechParameters = {
@@ -183,7 +183,7 @@ function ConsumableHtb(configs) {
             }
         }
 
-        var url = Network.buildUrl(baseUrl, [network, placementId, '0', '0', 'ADTECH' + joinedAdtechParameters]);
+        var url = Network.buildUrl(baseUrl, [networkId, placementId, '0', '0', 'ADTECH' + joinedAdtechParameters]);
 
         return {
             url: url,
