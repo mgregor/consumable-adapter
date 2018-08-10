@@ -280,7 +280,15 @@ function ConsumableHtb(configs) {
         /* the creative/adm for the given slot that will be rendered if is the winner.
          * Please make sure the URL is decoded and ready to be document.written.
          */
-        var bidCreative = curBid.adm;
+        var cb = curReturnParcel.networkId === '9599.1' ? 7654321 : System.now();
+        var bidCreative = '<script>'
+            + 'document.write(\'<div id=\"' + curReturnParcel.unitName + '-' + curReturnParcel.unitId + '\">\');</script>'
+            + curBid.adm
+            + '<script>document.write(\'</div>\');</script>'
+            + '<script>document.write(\'<div class="' + curReturnParcel.unitName + '"></div>\');</script>'
+            + '<script>document.write(\'<script src="https://yummy.consumable.com/' + curReturnParcel.unitId
+            + '/' + curReturnParcel.unitName + '/widget/unit.js?cb=' + cb
+            + '" charset="utf-8" async></scr\'+\'ipt>\');</script>';
 
         /* the dealId if applicable for this slot. */
         var bidDealId = '';
