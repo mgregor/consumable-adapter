@@ -202,14 +202,12 @@ function ConsumableHtb(configs) {
 
      /**
      * This function will render the pixel given.
-     * @param  {string} pixelUrl Tracking pixel img url.
+     * @param  {string} pixelHtml Pixel HTML.
      */
-    function __renderPixel(pixelUrl) {
-        if (pixelUrl){
-            Network.img({
-                url: decodeURIComponent(pixelUrl),
-                method: 'GET',
-            });
+    function __renderPixel(pixelHtml) {
+        if (pixelHtml){
+            var iframe = Browser.createHiddenIFrame(null);
+            System.documentWrite(iframe.contentDocument, pixelHtml);
         }
     }
 
@@ -300,7 +298,11 @@ function ConsumableHtb(configs) {
         * If firing a tracking pixel is not required or the pixel url is part of the adm,
         * leave empty;
         */
-        var pixelUrl = '';
+        var pixelHtml = '';
+
+        if (Object.hasOwnProperty.call(adResponse, 'ext')) {
+            pixelHtml = adResponse.ext.pixels || '';
+        }
 
         /* ---------------------------------------------------------------------------------------*/
 
@@ -341,8 +343,8 @@ function ConsumableHtb(configs) {
 
         //? if (FEATURES.RETURN_CREATIVE) {
         curReturnParcel.adm = bidCreative;
-        if (pixelUrl) {
-            curReturnParcel.winNotice = __renderPixel.bind(null, pixelUrl);
+        if (pixelHtml) {
+            curReturnParcel.winNotice = __renderPixel.bind(null, pixelHtml);
         }
         //? }
 
@@ -360,7 +362,7 @@ function ConsumableHtb(configs) {
             dealId: bidDealId || undefined,
             timeOfExpiry: __profile.features.demandExpiry.enabled ? (__profile.features.demandExpiry.value + System.now()) : 0,
             auxFn: __renderPixel,
-            auxArgs: [pixelUrl]
+            auxArgs: [pixelHtml]
         });
 
         //? if (FEATURES.INTERNAL_RENDER) {
